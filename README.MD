@@ -39,29 +39,26 @@ It includes:
 
 ```mermaid
 flowchart TD
+    A[Raw Text Data] --> B[Tokenizer]
+    B -->|Token IDs| C[Token Embedding Layer]
+    C --> D[Positional Embedding Layer]
+    D --> E[Transformer Blocks × N]
 
-A[Raw Text Data] --> B[Tokenizer]
-B -->|Token IDs| C[Token Embedding Layer]
-C --> D[Positional Embedding Layer]
-D --> E[Transformer Blocks × N]
+    subgraph Transformer_Block[Transformer Block]
+        E1[LayerNorm] --> E2[Multi-Head Attention with Causal Mask]
+        E2 --> E3[Residual Connection]
+        E3 --> E4[LayerNorm]
+        E4 --> E5[FeedForward Network (2 Linear + GELU)]
+        E5 --> E6[Residual Connection]
+    end
 
-subgraph Transformer Block
-E1[LayerNorm] --> E2[Multi-Head Attention (Q,K,V + Causal Mask)]
-E2 --> E3[Residual Connection]
-E3 --> E4[LayerNorm]
-E4 --> E5[FeedForward Network (2 Linear + GELU)]
-E5 --> E6[Residual Connection]
-end
-
-E --> F[Final LayerNorm]
-F --> G[Linear Projection → Vocab Logits]
-G --> H[Softmax → Next Token Probabilities]
-H --> I[Text Generation / Sampling]
-
-I -->|Optional| J[Pretrained GPT-2 Weights Loader]
-J --> K[LoRA Fine-Tuning (PEFT Integration)]
-K --> L[Evaluation / Output Text]
-```
+    E --> F[Final LayerNorm]
+    F --> G[Linear Projection → Vocab Logits]
+    G --> H[Softmax → Next Token Probabilities]
+    H --> I[Text Generation / Sampling]
+    I --> J[Pretrained GPT-2 Weights Loader]
+    J --> K[LoRA Fine-Tuning (PEFT Integration)]
+    K --> L[Evaluation / Output Text]
 
 ---
 
