@@ -42,23 +42,23 @@ flowchart TD
     A[Raw Text Data] --> B[Tokenizer]
     B -->|Token IDs| C[Token Embedding Layer]
     C --> D[Positional Embedding Layer]
-    D --> E[Transformer Blocks × N]
+    D --> E[Transformer Blocks x N]
 
     subgraph Transformer_Block[Transformer Block]
         E1[LayerNorm] --> E2[Multi-Head Attention with Causal Mask]
         E2 --> E3[Residual Connection]
         E3 --> E4[LayerNorm]
-        E4 --> E5[FeedForward Network (2 Linear + GELU)]
+        E4 --> E5[FeedForward Network: Linear → GELU → Linear]
         E5 --> E6[Residual Connection]
     end
 
     E --> F[Final LayerNorm]
-    F --> G[Linear Projection → Vocab Logits]
-    G --> H[Softmax → Next Token Probabilities]
-    H --> I[Text Generation / Sampling]
+    F --> G[Linear Projection to Vocab Logits]
+    G --> H[Softmax to Next Token Probabilities]
+    H --> I[Text Generation or Sampling]
     I --> J[Pretrained GPT-2 Weights Loader]
-    J --> K[LoRA Fine-Tuning (PEFT Integration)]
-    K --> L[Evaluation / Output Text]
+    J --> K[LoRA Fine-Tuning via PEFT]
+    K --> L[Evaluation and Output Text]
 
 ---
 
