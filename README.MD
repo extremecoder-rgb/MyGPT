@@ -34,6 +34,12 @@ It includes:
 
 ---
 
+### Architecture Flow
+
+![MyGPT Architecture](flowchart.png)
+
+---
+
 ## 📂 Directory Structure
 
 ```bash
