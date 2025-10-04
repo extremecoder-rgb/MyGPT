@@ -8,7 +8,6 @@ This project includes everything from scratch-built tokenizers to advanced param
 ## 📘 Table of Contents
 
 * [Overview](#-overview)
-* [Architecture Flowchart](#-architecture-flowchart)
 * [Directory Structure](#-directory-structure)
 * [Major Features](#-major-features)
 * [How It Works](#-how-it-works-component-breakdown)
@@ -32,33 +31,6 @@ It includes:
 * Robust training & evaluation pipelines
 * Native integration with **OpenAI GPT-2** pretrained weights
 * **LoRA-based fine-tuning** for efficient adaptation
-
----
-
-## 🧮 Architecture Flowchart
-
-```mermaid
-flowchart TD
-    A[Raw Text Data] --> B[Tokenizer]
-    B -->|Token IDs| C[Token Embedding Layer]
-    C --> D[Positional Embedding Layer]
-    D --> E[Transformer Blocks x N]
-
-    subgraph Transformer_Block[Transformer Block]
-        E1[LayerNorm] --> E2[Multi-Head Attention with Causal Mask]
-        E2 --> E3[Residual Connection]
-        E3 --> E4[LayerNorm]
-        E4 --> E5[FeedForward Network: Linear → GELU → Linear]
-        E5 --> E6[Residual Connection]
-    end
-
-    E --> F[Final LayerNorm]
-    F --> G[Linear Projection to Vocab Logits]
-    G --> H[Softmax to Next Token Probabilities]
-    H --> I[Text Generation or Sampling]
-    I --> J[Pretrained GPT-2 Weights Loader]
-    J --> K[LoRA Fine-Tuning via PEFT]
-    K --> L[Evaluation and Output Text]
 
 ---
 
